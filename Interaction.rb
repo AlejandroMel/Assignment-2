@@ -12,7 +12,7 @@ class Interaction
     
   end
   
-def filters(list)
+def self.filters(list)
   
   list.each do |record|
     if record[0] == record[1]
@@ -25,7 +25,7 @@ def filters(list)
   end 
 end 
   
-def get_interactors(gene_id)
+def self.get_interactors(gene_id)
 
 interactors = []
 data = []

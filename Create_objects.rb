@@ -1,4 +1,4 @@
-require './Gene.rb'
+require './Gene_class.rb'
 require './Interaction.rb'
 
 
@@ -9,7 +9,7 @@ def create_geneobject(openfile)
   File.open(openfile, "r").each do |gene_id| 
     
     gene_id = gene_id.strip 
-    new_gene = Gene.new(:Locus_code => gene_id.upcase, :GO_terms => get_goterms(gene_id), :Kegg_pathways => get_keggpathways(gene_id))
+    new_gene = Gene.new(:Locus_code => gene_id.upcase, :GO_terms => Gene.get_goterms(gene_id), :Kegg_pathways => Gene.get_keggpathways(gene_id))
     genes_list.append(new_gene)
   end 
 return genes_list    
@@ -22,7 +22,7 @@ def create_interactionobject(openfile)
   File.open(openfile, "r").each do |gene_id|
     
     gene_id = gene_id.strip
-    new_gene = Interaction.new(:Locus_code => gene_id.upcase, :Interactors => get_interactions(gene_id))
+    new_gene = Interaction.new(:Locus_code => gene_id.upcase, :Interactors => Interaction.get_interactors(gene_id))
     
     list_genes.append(new_gene)
   end 

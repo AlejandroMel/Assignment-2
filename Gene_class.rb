@@ -17,7 +17,7 @@ class Gene
   
   
    
-def get_goterms(gene_id)
+def self.get_goterms(gene_id)
 
 data = []
 go = []
@@ -42,7 +42,7 @@ return go
 end
   
   
-def get_keggpathways(gene_id)
+def self.get_keggpathways(gene_id)
   
   kegg = []
   response = fetch("http://togows.org/entry/kegg-genes/ath:#{gene_id}/pathways.json")
@@ -55,4 +55,4 @@ end
 
 
 
-end  
+end   

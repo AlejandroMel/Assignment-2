@@ -1,4 +1,28 @@
 require './Create_objects.rb'
 
-genes = create_geneobject("ArabidopsisSubNetwork_GeneList.txt")
-interactions = create_interactionobject("ArabidopsisSubNetwork_GeneList.txt")
+def fetch(url, headers = {accept: "*/*"}, user = "", pass="")
+  response = RestClient::Request.execute({
+    method: :get,
+    url: url.to_s,
+    user: user,
+    password: pass,
+    headers: headers})
+  return response
+  
+  rescue RestClient::ExceptionWithResponse => e
+    $stderr.puts e.inspect
+    response = false
+    return response  # now we are returning 'False', and we will check that with an \"if\" statement in our main code
+  rescue RestClient::Exception => e
+    $stderr.puts e.inspect
+    response = false
+    return response  # now we are returning 'False', and we will check that with an \"if\" statement in our main code
+  rescue Exception => e
+    $stderr.puts e.inspect
+    response = false
+    return response  # now we are returning 'False', and we will check that with an \"if\" statement in our main code
+end
+
+genes = create_geneobject("Test.txt")
+interactions = create_interactionobject("Test.txt")
+
