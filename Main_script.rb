@@ -30,6 +30,7 @@ def create_networks(list1,list2)
 
 number_genes = list1.length
 i = 0
+j = 0
 genes_of_list = []
  
 while i < number_genes
@@ -44,16 +45,12 @@ puts
       list2[i].Interactors.each do |record|
         list1.each do |gene|
           if record == gene.Locus_code
-          puts "Including the gene from the list: #{gene.Locus_code}, #{gene.GO_terms}, #{gene.Kegg_pathways}"
-          puts
-          genes_of_list.append(record)
+            puts "Including the gene from the list: #{gene.Locus_code}, #{gene.GO_terms}, #{gene.Kegg_pathways}"
+            puts
+            genes_of_list.append(record)
           end
         end 
       end
-    if genes_of_list == []
-      puts "However, none is from the list"
-      puts 
-    end
   else 
     puts "The gene #{list1[i].Locus_code} has no interactors"
     puts 
@@ -67,7 +64,8 @@ end
 
 if genes_of_list.length > 0
   puts "Our hypothesis is true as there are interactions between genes from the list"
-end   
+end 
+  
 end  
 
 genes = create_geneobject("ArabidopsisSubNetwork_GeneList.txt")
