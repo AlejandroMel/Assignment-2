@@ -18,6 +18,8 @@ class Gene
   
    
 def self.get_goterms(gene_id)
+  
+puts "Getting the GO terms for the gene #{gene_id}"
 
 data = []
 go = []
@@ -32,25 +34,35 @@ data.each do |record|
     end
 end
 
+if data == nil
+  data = []
+end 
+
 data.each do |record|
   record[1] = record[1].split(":")
   element = record[0], record[1][1] if (record[1][0] == "P")
   go.append(element)  
 end
 go -= [nil]
+puts "Done"
+puts
 return go
 end
   
   
 def self.get_keggpathways(gene_id)
   
-  kegg = []
-  response = fetch("http://togows.org/entry/kegg-genes/ath:#{gene_id}/pathways.json")
-  if response
-    kegg = JSON.parse(response.body)
-  end 
-  
-  return kegg[0][0]
+puts "Getting the pathways where the gene #{gene_id} is involved"
+
+kegg = []
+
+response = fetch("http://togows.org/entry/kegg-genes/ath:#{gene_id}/pathways.json")
+  if response 
+    kegg.append(JSON.parse(response.body))
+  end
+puts "Done"
+puts
+return kegg[0][0]
 end 
 
 

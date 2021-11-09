@@ -12,20 +12,24 @@ class Interaction
     
   end
   
-def self.filters(list)
+def self.filters(x)
   
-  list.each do |record|
+  x.each do |record|
     if record[0] == record[1]
       x.delete(record)
     elsif record[2] and record[3] != "taxid:3702" 
       x.delete(record)
-    elsif record[4] != "intact-miscore:0.9"
+      record[4] = record[4].split(":")
+    elsif record[4][1] <= "0.6"
       x.delete(record)
     end 
   end 
 end 
   
-def self.get_interactors(gene_id)
+def self.get_interactions(gene_id)
+  
+puts "Getting the interactions for the gene #{gene_id}"
+puts
 
 interactors = []
 data = []
@@ -54,7 +58,8 @@ dataint.each do |element|
     interactors.append(interactor)
     end 
 end
-interactors -= [nil] #I have taken this code line from https://stackoverflow.com/questions/26114332/remove-nil-and-blank-string-in-an-array-in-ruby/26114449 to get rid from the nil values that report the unless function above. 
+interactors -= [nil] #I have taken this code line from https://stackoverflow.com/questions/26114332/remove-nil-and-blank-string-in-an-array-in-ruby/26114449 to get rid from the nil values that report the unless function above.
+puts "Done"
 return interactors
 end
 
