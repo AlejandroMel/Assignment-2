@@ -28,9 +28,6 @@ end
   
 def self.get_interactions(gene_id)
   
-puts "Getting the interactions for the gene #{gene_id}"
-puts
-
 interactors = []
 data = []
 dataint = []
@@ -55,12 +52,24 @@ dataint.each do |element|
     record = record.split(":")
     record[1] = record[1].upcase
     interactor = record[1] unless record[1] == gene_id
-    interactors.append(interactor)
+    interactors.append(interactor) 
     end 
 end
 interactors -= [nil] #I have taken this code line from https://stackoverflow.com/questions/26114332/remove-nil-and-blank-string-in-an-array-in-ruby/26114449 to get rid from the nil values that report the unless function above.
-puts "Done"
 return interactors
 end
+
+def self.store_interactinggenes(list)
+  
+newgenes_list = []
+
+list.each do |gene|
+  gene.Interactors.each do |interactor|
+    newgenes_list.append(interactor) if interactor.match(/AT\wG\d{5}/) 
+  end 
+end   
+return newgenes_list 
+end    
+ 
 
 end 
